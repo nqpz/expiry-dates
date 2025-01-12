@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'varer/style.css' %}" rel="stylesheet">
+    <script src="{% static 'varer/index_script.js' %}"></script>
+    <title>Varer</title>
+  </head>
+  <body>
+    <p><a href="/">Gensortér</a></p>
+    <p><a href="/varer/ny">Opret ny vare</a></p>
+    {% if varer %}
+    <table>
+      {% for vare in varer %}
+      <tr>
+        <td>
+          <a href="{{ vare.vare_image.url }}">
+            <img src="{{ vare.vare_image.url }}/thumbnail" width="100" height="100">
+          </a>
+        </td>
+        <td>
+          <a href="/admin/varer/vare/{{ vare.id }}/change/">{{ vare.varenavn_text }}</a><br><br>
+
+          <input data-id="{{ vare.id }}" type="date" name="date" class="edit-date" value="{{ vare.udløb_date|date:"Y-m-d" }}" disabled><br>
+          
+          <button class="allow-edit-date">Ny dato</button>
+          <button class="save-edit-date" hidden>Gem dato</button>
+          <br>
+          <span class="status">&nbsp;</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>Ingen varer tilgængelige.</p>
+    {% endif %}
+  </body>
+</html>
