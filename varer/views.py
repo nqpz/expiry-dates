@@ -40,7 +40,8 @@ def ny_opret(request):
     form.save()
     # vare = Vare(varenavn_text=request.POST["name"], udløb_date=request.POST["date"], vare_image=request.POST["image"])
     # vare.save()
-    return HttpResponseRedirect(reverse("varer:ny"))
+    # return HttpResponseRedirect(reverse("varer:ny"))
+    return HttpResponseRedirect(reverse("varer:index"))
     
 def opdater(request, vare_id):
     vare = get_object_or_404(Vare, pk=vare_id)
