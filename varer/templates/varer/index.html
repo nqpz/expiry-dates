@@ -21,7 +21,7 @@
           </a>
         </td>
         <td>
-          <a href="/admin/varer/vare/{{ vare.id }}/change/">{{ vare.varenavn_text }}</a><br><br>
+          {{ vare.varenavn_text }} <sup>(<a href="/admin/varer/vare/{{ vare.id }}/change/">ret</a>)</sup><br><br>
 
           <input data-id="{{ vare.id }}" type="date" name="date" class="edit-date" value="{{ vare.udløb_date|date:"Y-m-d" }}" disabled {% if not vare.udløb_date %}hidden{% endif %}>
           {% if not vare.udløb_date %}<strong>Ingen dato</strong>{% endif %}
