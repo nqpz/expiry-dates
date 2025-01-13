@@ -23,9 +23,11 @@
         <td>
           <a href="/admin/varer/vare/{{ vare.id }}/change/">{{ vare.varenavn_text }}</a><br><br>
 
-          <input data-id="{{ vare.id }}" type="date" name="date" class="edit-date" value="{{ vare.udløb_date|date:"Y-m-d" }}" disabled><br>
-          
-          <button class="allow-edit-date">Ny dato</button>
+          <input data-id="{{ vare.id }}" type="date" name="date" class="edit-date" value="{{ vare.udløb_date|date:"Y-m-d" }}" disabled {% if not vare.udløb_date %}hidden{% endif %}>
+          {% if not vare.udløb_date %}<strong>Ingen dato</strong>{% endif %}
+          <br>
+
+          <button class="allow-edit-date">{% if vare.udløb_date %}Ny{% else %}Sæt{% endif %} dato</button>
           <button class="save-edit-date" hidden>Gem dato</button>
           <br>
           <span class="status">&nbsp;</span>

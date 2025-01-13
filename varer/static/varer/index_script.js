@@ -10,9 +10,10 @@ window.addEventListener("load", (event) => {
     let status = parent.getElementsByClassName("status")[0];
     date.disabled = 'disabled';
     allowButton.addEventListener("click", (event) => {
-      allowButton.hidden = 'hidden';
-      saveButton.hidden = ''
-      date.disabled = '';
+      allowButton.setAttribute('hidden', 'hidden');
+      saveButton.removeAttribute('hidden');
+      date.removeAttribute('disabled');
+      date.removeAttribute('hidden');
       date.focus();
     });
     saveButton.addEventListener("click", async (event) => {
@@ -34,10 +35,10 @@ window.addEventListener("load", (event) => {
         setTimeout(() => {
           status.innerHTML = "&nbsp;";
         }, 5000);
-        date.disabled = 'disabled';
+        date.setAttribute('disabled', 'disabled');
         date.blur();
-        allowButton.hidden = '';
-        saveButton.hidden = 'hidden';
+        allowButton.removeAttribute('hidden');
+        saveButton.setAttribute('hidden', 'hidden');
       } catch (error) {
         status.innerHTML = error.message;
       }
