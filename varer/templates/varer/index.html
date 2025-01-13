@@ -9,37 +9,54 @@
     <title>Varer</title>
   </head>
   <body>
-    <ul>
-      <li><a href="/">Gensortér</a></li>
-      <li><a href="/admin/varer/vare/add/">Opret ny vare</a></li>
-      <li><a href="/admin/varer/vare/">Administrér varer</a></li>
-    </ul>
-    {% if varer %}
-    <table>
-      {% for vare in varer %}
-      <tr>
-        <td>
-          <a href="{{ vare.vare_image.url }}">
-            <img src="{{ vare.vare_image.url }}/thumbnail" width="100" height="100">
-          </a>
-        </td>
-        <td>
-          {{ vare.varenavn_text }} <sup>(<a href="/admin/varer/vare/{{ vare.id }}/change/">ret</a>)</sup><br><br>
+    <div>
+      <h1>Udløbsdatoer</h1>
+      <ul>
+        <li><a href="/">Gensortér</a></li>
+        <li><a href="/admin/varer/vare/add/">Opret ny vare</a></li>
+        <li><a href="/admin/varer/vare/">Administrér varer</a></li>
+      </ul>
+      <hr>
+      {% if varer %}
+      <table>
+        {% for vare in varer %}
+        <tr>
+          <td>
+            <a href="{{ vare.vare_image.url }}">
+              <img src="{{ vare.vare_image.url }}/thumbnail" width="100" height="100">
+            </a>
+          </td>
+          <td>
+            <p>
+              {{ vare.varenavn_text }}
+              <sup>
+                (<a href="/admin/varer/vare/{{ vare.id }}/change/">ret</a>)
+              </sup>
+            </p>
 
-          <input data-id="{{ vare.id }}" type="date" name="date" class="edit-date" value="{{ vare.udløb_date|date:"Y-m-d" }}" disabled {% if not vare.udløb_date %}hidden{% endif %}>
-          {% if not vare.udløb_date %}<strong>Ingen dato</strong>{% endif %}
-          <br>
+            <p>
+              <input data-id="{{ vare.id }}"
+                     type="date"
+                     name="date"
+                     class="edit-date"
+                     value="{{ vare.udløb_date|date:"Y-m-d" }}"
+                     disabled
+                     {% if not vare.udløb_date %}hidden{% endif %}>
+              {% if not vare.udløb_date %}<strong class="no-date">Ingen dato</strong>{% endif %}
+            </p>
 
-          <button class="allow-edit-date">{% if vare.udløb_date %}Ny{% else %}Sæt{% endif %} dato</button>
-          <button class="save-edit-date" hidden>Gem dato</button>
-          <br>
-          <span class="status">&nbsp;</span>
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% else %}
-    <p>Ingen varer tilgængelige.</p>
-    {% endif %}
+            <button class="allow-edit-date">
+              {% if vare.udløb_date %}Ny{% else %}Sæt{% endif %} dato
+            </button>
+            <button class="save-edit-date" hidden>Gem dato</button>
+            <span class="status">&nbsp;</span>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p>Ingen varer tilgængelige.</p>
+      {% endif %}
+    </div>
   </body>
 </html>

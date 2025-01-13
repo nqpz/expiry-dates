@@ -4,14 +4,17 @@ window.addEventListener("load", (event) => {
   const dates = document.getElementsByClassName("edit-date");
   for (let i = 0; i < dates.length; i++) {
     let date = dates[i];
-    let parent = date.parentElement;
+    let parent = date.parentElement.parentElement;
     let allowButton = parent.getElementsByClassName("allow-edit-date")[0];
     let saveButton = parent.getElementsByClassName("save-edit-date")[0];
     let status = parent.getElementsByClassName("status")[0];
+    let strongs = parent.getElementsByClassName("no-date");
+    let strong = strongs.length == 1 ? strongs[0] : null;
     date.disabled = 'disabled';
     allowButton.addEventListener("click", (event) => {
       allowButton.setAttribute('hidden', 'hidden');
       saveButton.removeAttribute('hidden');
+      strong?.setAttribute('hidden', 'hidden');
       date.removeAttribute('disabled');
       date.removeAttribute('hidden');
       date.focus();
