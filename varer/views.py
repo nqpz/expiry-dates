@@ -27,22 +27,6 @@ def upload_thumbnail(request, filename):
     cache_path = os.path.join(base, im.url[1:])
     return FileResponse(open(cache_path, "rb"))
 
-def ny(request):
-    return render(request, "varer/new.html")
-
-class VareForm(ModelForm):
-    class Meta:
-        model = Vare
-        fields = ["varenavn_text", "udløb_date", "vare_image"]
-
-def ny_opret(request):
-    form = VareForm(request.POST, request.FILES)
-    form.save()
-    # vare = Vare(varenavn_text=request.POST["name"], udløb_date=request.POST["date"], vare_image=request.POST["image"])
-    # vare.save()
-    # return HttpResponseRedirect(reverse("varer:ny"))
-    return HttpResponseRedirect(reverse("varer:index"))
-    
 def opdater(request, vare_id):
     vare = get_object_or_404(Vare, pk=vare_id)
     vare.udløb_date = request.POST["date"]
