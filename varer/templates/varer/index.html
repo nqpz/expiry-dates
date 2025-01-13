@@ -9,8 +9,11 @@
     <title>Varer</title>
   </head>
   <body>
-    <p><a href="/">Gensortér</a></p>
-    <p><a href="/admin/varer/vare/add/">Opret ny vare</a></p>
+    <ul>
+      <li><a href="/">Gensortér</a></li>
+      <li><a href="/admin/varer/vare/add/">Opret ny vare</a></li>
+      <li><a href="/admin/varer/vare/">Administrér varer</a></li>
+    </ul>
     {% if varer %}
     <table>
       {% for vare in varer %}
