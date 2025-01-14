@@ -22,14 +22,21 @@ class IndexView(generic.ListView):
 class AndetVaregruppe:
     id = 0
     varegruppe_text = 'Andet'
+andet = AndetVaregruppe()
 
 def _index(request, varegruppe_id):
+    if varegruppe_id is None:
+        varegruppe_actual = None
+    elif varegruppe_id > 0:
+        varegruppe_actual = get_object_or_404(Varegruppe, pk=varegruppe_id)
+    else:
+        varegruppe_actual = andet
     varegrupper = list(Varegruppe.objects.order_by("varegruppe_text"))
-    varegrupper.append(AndetVaregruppe())
+    varegrupper.append(andet)
     varer = Vare.objects.order_by("udløb_date")
     context = {
         "varegrupper": varegrupper,
-        "varegruppe_id": varegruppe_id,
+        "varegruppe_actual": varegruppe_actual,
     }
     if varegruppe_id is None:
         context["varer"] = []

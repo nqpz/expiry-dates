@@ -23,7 +23,7 @@
       <ul>
         {% for varegruppe in varegrupper %}
         <li>
-          {% if varegruppe.id == varegruppe_id %}
+          {% if varegruppe.id == varegruppe_actual.id %}
           {{ varegruppe.varegruppe_text }}
           {% else %}
           <a href="/{{ varegruppe.id }}">{{ varegruppe.varegruppe_text }}</a>
@@ -35,9 +35,10 @@
       <p class="notice">Ingen varegrupper tilgængelige.</p>
       {% endif %}
       <hr>
-      {% if varegruppe_id is not None %}
+      {% if varegruppe_actual is not None %}
+      <h2>{{ varegruppe_actual.varegruppe_text }}</h2>
       <ul>
-        <li><a href="/{{ varegruppe_id }}">Gensortér</a></li>
+        <li><a href="/{{ varegruppe_actual.id }}">Gensortér</a></li>
       </ul>
       {% if varer %}
       <table>
