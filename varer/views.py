@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect, FileResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from django.conf import settings
 from sorl.thumbnail import get_thumbnail
 
 from .models import Vare
@@ -17,10 +18,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Vare.objects.order_by("udløb_date")
 
-def upload(request, filename):
-    path = os.path.join(base, "upload", filename)
-    return FileResponse(open(path, "rb"))
-
 def upload_thumbnail(request, filename):
     path = os.path.join(base, "upload", filename)
     im = get_thumbnail(path, '100x100', crop='center', quality=80)
@@ -32,3 +29,8 @@ def opdater(request, vare_id):
     vare.udløb_date = request.POST["date"]
     vare.save();
     return JsonResponse({"success": True})
+
+if settings.DEBUG:
+    def upload(request, filename):
+        path = os.path.join(base, "upload", filename)
+        return FileResponse(open(path, "rb"))

@@ -24,13 +24,14 @@ from django.views.static import serve
 urlpatterns = [
     path('', include('varer.urls')),
     path('admin/', admin.site.urls),
-
-    # Only for local development
-    re_path(
-        r"^static/(?P<path>.*)$",
-        serve,
-        {
-            "document_root": settings.STATIC_ROOT,
-        },
-        )
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(
+        re_path(
+            r"^static/(?P<path>.*)$",
+            serve,
+            {
+                "document_root": settings.STATIC_ROOT,
+            },
+        ))
