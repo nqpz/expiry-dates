@@ -35,3 +35,11 @@ if settings.DEBUG:
                 "document_root": settings.STATIC_ROOT,
             },
         ))
+    urlpatterns.append(
+        re_path(
+            r"^cache/(?P<path>.*)$",
+            serve,
+            {
+                "document_root": 'cache',
+            },
+        ))
