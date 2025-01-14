@@ -19,20 +19,12 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Vare.objects.order_by("udløb_date")
 
-class AndetVaregruppe:
-    id = 0
-    varegruppe_text = 'Andet'
-andet = AndetVaregruppe()
-
 def _index(request, varegruppe_id):
     if varegruppe_id is None:
         varegruppe_actual = None
-    elif varegruppe_id > 0:
-        varegruppe_actual = get_object_or_404(Varegruppe, pk=varegruppe_id)
     else:
-        varegruppe_actual = andet
+        varegruppe_actual = get_object_or_404(Varegruppe, pk=varegruppe_id)
     varegrupper = list(Varegruppe.objects.order_by("varegruppe_text"))
-    varegrupper.append(andet)
     varer = Vare.objects.order_by("udløb_date")
     context = {
         "varegrupper": varegrupper,
@@ -40,10 +32,8 @@ def _index(request, varegruppe_id):
     }
     if varegruppe_id is None:
         context["varer"] = []
-    elif varegruppe_id > 0:
-        context["varer"] = varer.filter(varegruppe=varegruppe_id)
     else:
-        context["varer"] = varer.filter(varegruppe=None)
+        context["varer"] = varer.filter(varegruppe=varegruppe_id)
     return render(request, "varer/index.html", context)
 
 @ensure_csrf_cookie
