@@ -12,13 +12,33 @@
   </head>
   <body>
     <article>
-      <h1>Udløbsdatoer</h1>
+      <h1><a href="/">Udløbsdatoer</a></h1>
       <ul>
-        <li><a href="/">Gensortér</a></li>
         <li><a href="/admin/varer/vare/add/">Opret ny vare</a></li>
         <li><a href="/admin/varer/vare/">Administrér varer</a></li>
       </ul>
       <hr>
+      <h2>Varegrupper</h2>
+      {% if varegrupper %}
+      <ul>
+        {% for varegruppe in varegrupper %}
+        <li>
+          {% if varegruppe.id == varegruppe_id %}
+          {{ varegruppe.varegruppe_text }}
+          {% else %}
+          <a href="/{{ varegruppe.id }}">{{ varegruppe.varegruppe_text }}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="notice">Ingen varegrupper tilgængelige.</p>
+      {% endif %}
+      <hr>
+      {% if varegruppe_id is not None %}
+      <ul>
+        <li><a href="/{{ varegruppe_id }}">Gensortér</a></li>
+      </ul>
       {% if varer %}
       <table>
         {% for vare in varer %}
@@ -61,7 +81,10 @@
         {% endfor %}
       </table>
       {% else %}
-      <p>Ingen varer tilgængelige.</p>
+      <p class="notice">Ingen varer tilgængelige.</p>
+      {% endif %}
+      {% else %}
+      <p class="notice">Vælg varegruppe.</p>
       {% endif %}
     </article>
   </body>
