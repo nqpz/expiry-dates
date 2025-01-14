@@ -7,6 +7,10 @@ body {
   justify-content: center;
 }
 
+td:first-child {
+  padding-right: 5px;
+}
+
 a:link, a:visited {
   color: blue;
   text-decoration: none;
