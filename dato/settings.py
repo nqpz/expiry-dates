@@ -26,8 +26,10 @@ SECRET_KEY = 'django-insecure-7#g*-wuh8_7iw(n4^2o8euoi7ya*mx%9)wj-zw0#^@=07ks3_&
 production_domain = os.getenv('PRODUCTION_DOMAIN')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not production_domain
-ALLOWED_HOSTS = ["localhost", production_domain]
-CSRF_TRUSTED_ORIGINS = ['https://localhost', f'https://{production_domain}']
+if DEBUG:
+    production_domain = 'localhost'
+ALLOWED_HOSTS = [production_domain]
+CSRF_TRUSTED_ORIGINS = [f'https://{production_domain}']
 
 
 # Application definition
