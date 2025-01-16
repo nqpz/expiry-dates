@@ -31,17 +31,18 @@ window.addEventListener("load", (event) => {
           mode: 'same-origin'
         });
         if (!response.ok) {
-          status.innerHTML = response.status;
+          status.innerHTML = 'Fejl: ' + response.status;
+        } else {
+          const result = await response;
+          status.innerHTML = "Gemt";
+          setTimeout(() => {
+            status.innerHTML = "&nbsp;";
+          }, 5000);
+          date.setAttribute('disabled', 'disabled');
+          date.blur();
+          allowButton.removeAttribute('hidden');
+          saveButton.setAttribute('hidden', 'hidden');
         }
-        const result = await response;
-        status.innerHTML = "Gemt";
-        setTimeout(() => {
-          status.innerHTML = "&nbsp;";
-        }, 5000);
-        date.setAttribute('disabled', 'disabled');
-        date.blur();
-        allowButton.removeAttribute('hidden');
-        saveButton.setAttribute('hidden', 'hidden');
       } catch (error) {
         status.innerHTML = error.message;
       }
