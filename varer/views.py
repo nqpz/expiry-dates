@@ -60,7 +60,8 @@ def index_with_id(request, varegruppe_id):
 
 def opdater(request, vare_id):
     vare = get_object_or_404(Vare, pk=vare_id)
-    vare.udløb_date = request.POST["date"]
+    user_input = request.POST["date"]
+    vare.udløb_date = None if user_input == '' else user_input
     vare.save();
     return JsonResponse({"success": True})
 

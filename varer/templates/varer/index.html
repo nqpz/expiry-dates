@@ -55,7 +55,7 @@
           </td>
           <td>
             <p>
-              {{ vare.varenavn_text }}
+              <span class="vare-name">{{ vare.varenavn_text }}</span>
               <sup>
                 (<a href="/admin/varer/vare/{{ vare.id }}/change/">ret</a>)
               </sup>
@@ -76,6 +76,9 @@
               {% if vare.udløb_date %}Ny{% else %}Sæt{% endif %} dato
             </button>
             <button class="save-edit-date" hidden>Gem dato</button>
+            <button class="clear-edit-date">
+              Udsolgt
+            </button>
             <span class="status">&nbsp;</span>
           </td>
         </tr>
