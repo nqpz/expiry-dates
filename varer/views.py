@@ -23,7 +23,8 @@ class IndexView(generic.ListView):
 def login(request):
     env = os.getenv("PASSWORD")
     if env and request.POST["password"] == env:
-        del request.session['failed_to_login']
+        if 'failed_to_login' in request.session:
+            del request.session['failed_to_login']
         request.session['logged_in'] = True
     else:
         request.session['failed_to_login'] = True
