@@ -61,7 +61,7 @@ window.addEventListener("load", (event) => {
       clearButton.setAttribute('disabled', 'disabled');
     }
     clearButton.addEventListener("click", (event) => {
-      if (window.confirm("Er du sikker på at du vil fjerne udløbsdatoen " + date.value + " for " + name + "?")) {
+      if (window.confirm("Er du sikker på at du vil fjerne udløbsdatoen for " + name + "?")) {
         updateDate('', () => {
           date.value = ''
           clearButton.setAttribute('disabled', 'disabled');
