@@ -13,6 +13,6 @@ mkShell {
   #   pip install Pillow Django sorl-thumbnail
   shellHook = ''
     . .venv/bin/activate
-    # Remember to export PRODUCTION_DOMAIN
+    # Remember to export PRODUCTION_DOMAIN and PASSWORD
   '';
 }

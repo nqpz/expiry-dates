@@ -1,3 +1,4 @@
+import os
 import os.path
 from django.forms import ModelForm
 from django.http import JsonResponse, HttpResponseRedirect, FileResponse
@@ -19,7 +20,20 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Vare.objects.order_by("udløb_date")
 
+def login(request):
+    env = os.getenv("PASSWORD")
+    if env and request.POST["password"] == env:
+        del request.session['failed_to_login']
+        request.session['logged_in'] = True
+    else:
+        request.session['failed_to_login'] = True
+    return HttpResponseRedirect(reverse("varer:index"))
+
 def _index(request, varegruppe_id):
+    if 'logged_in' not in request.session:
+        return render(request, "varer/login.html",
+                      {"border_color": 'red' if 'failed_to_login' in request.session else 'black'})
+
     if varegruppe_id is None:
         varegruppe_actual = None
     else:

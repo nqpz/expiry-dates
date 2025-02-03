@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/varer/icon.png" />
+    <link href="{% static 'varer/style.css' %}" rel="stylesheet">
+    <title>Udløbsdatoer</title>
+  </head>
+  <body>
+    <article>
+      <h1>Udløbsdatoer</h1>
+      <form method="post" action="/login">
+        {% csrf_token %}
+        <label for="password">Kode</label>
+        <input name="password"
+               style="border-style: solid; border-color: {{ border_color }}">
+        <input type="submit" value="Log ind">
+      </form>
+    </article>
+  </body>
+</html>

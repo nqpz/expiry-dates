@@ -6,6 +6,7 @@ from . import views
 app_name = "varer"
 urlpatterns = [
     path("", views.index, name="index"),
+    path("login", views.login, name="login"),
     path("<int:varegruppe_id>", views.index_with_id, name="index_with_id"),
     path("varer/<int:vare_id>/opdater/", views.opdater, name="opdater")
 ]
